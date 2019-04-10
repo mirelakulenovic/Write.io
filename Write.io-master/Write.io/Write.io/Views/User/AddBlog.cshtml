@@ -1,0 +1,42 @@
+﻿@model Write.io.Models.Blog
+@{
+    ViewBag.Title = "AddBlog";
+}
+
+<h2>Add Blog</h2>
+
+@using (Html.BeginForm("AddBlog", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Fill in your blog information</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-rows">
+        <div class="form-group col-12 col-md-6">
+            @Html.LabelFor(m => m.Title, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        </div>
+        <div class="form-group col-12 col-md-6">
+            @Html.LabelFor(m => m.BlogHeaderURL, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.BlogHeaderURL, new { @class = "form-control" })
+        </div>
+        <div class="form-group col-12 col-md-6">
+            @Html.LabelFor(m => m.Body, new { @class = "control-label" })
+            @Html.TextAreaFor(m => m.Body, new { @class = "form-control", @rows = "5" })
+        </div>
+        <div class="form-group col-12 col-md-6">
+            @Html.LabelFor(m => m.Template, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.Template, new { @class = "form-control", @placeholder = "default" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Add Blog" />*
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

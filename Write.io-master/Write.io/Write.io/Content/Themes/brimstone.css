@@ -1,0 +1,391 @@
+﻿:root {
+    --primary-color: #E20C0C;
+    --secondary-color: #8F0909;
+    --primary-accent: #7b2415;
+    --secondary-accent: #491107;
+    --primary-background: #13141E;
+    --secondary-background: #FFFFFF;
+    --shadow: #E20C0C;
+    --header-overlay: rgba(250, 0, 0, 0.3);
+    --dark-text: #1B171D;
+    --light-text: #FFFFFF;
+}
+
+/* Blog styling */
+
+body {
+    background-color: var(--primary-background);
+    color: var(--dark-text);
+}
+
+nav {
+    line-height: 1;
+    z-index: 12;
+}
+
+.BlogHeaderContainer {
+    display: flex;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 290px;
+    background-color: var(--header-overlay);
+    box-shadow: 0px 0px 16px 1px var(--shadow);
+}
+
+#BlogHeaderImage {
+    z-index: -1;
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    width: 110%;
+    height: 110%;
+    filter: blur(4px);
+    background: no-repeat;
+    background-size: cover;
+}
+
+
+.BlogHeaderLink {
+    color: var(--light-text);
+    text-shadow: 0px 0px 6px var(--secondary-accent);
+}
+
+    .BlogHeaderLink:hover {
+        color: var(--light-text);
+        text-shadow: 0px 0px 6px var(--secondary-color);
+        text-decoration: none;
+    }
+
+.navbar {
+}
+
+.BlogHeaderContents {
+    display: flex;
+    margin-top: 24px;
+    align-self: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.BlogTitle {
+    flex: 1;
+    margin-top: 128px;
+}
+
+.BlogControllers {
+    display: inline-flex;
+    align-self: flex-end;
+    margin-bottom: 24px;
+    margin-right: 10px;
+}
+
+.btn-blog {
+    background-color: var(--primary-color);
+}
+
+    .btn-blog:hover {
+        background: radial-gradient( var(--primary-color), var(--secondary-color));
+    }
+
+.BlogContainer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 300px;
+}
+
+/* List of Blog Posts */
+
+.PostListItem {
+    /*background-color: var(--primary-color);*/
+    display: flex;
+    flex-direction: column;
+    margin: 3px 3px 32px 3px;
+    background-color: var(--secondary-background);
+    box-shadow: 2px -2px 16px -4px var(--shadow);
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.PostListHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.PostListHeader a:hover {
+    text-decoration: none;
+}
+
+.PostListHeaderTitle {
+    flex: 1;
+    margin: 0px 0px 0px 16px;
+    font-size: 32px;
+}
+
+    .PostListHeaderTitle a {
+        color: var(--dark-text);
+    }
+
+    .PostListHeaderTitle :hover {
+        text-decoration: none;
+    }
+
+.PostListHeaderEditPost {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    color: var(--light-text);
+    text-shadow: 0px 0px 8px var(--secondary-accent);
+    width: 64px;
+    height: 64px;
+}
+
+.PostListHeaderDate {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    text-shadow: 0px 0px 8px var(--secondary-accent);
+    width: 64px;
+    height: 64px;
+    padding: 0;
+}
+
+.HeaderDate {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.HeaderMonth {
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-top: -6px;
+}
+
+.HeaderYear {
+    font-size: 12px;
+    margin: -4px 0px 2px 0px;
+}
+
+.PostListSubheader {
+    display: flex;
+    background-color: var(--primary-accent);
+    color: var(--light-text);
+    box-shadow: inset 0px 0px 16px 1px rgba(0,0,0,0.1);
+    align-items: center;
+    align-content: center;
+    padding: 4px 4px 4px 16px;
+}
+
+    .PostListSubheader i {
+        font-size: 12px;
+    }
+
+.SubheaderLeft {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+    .SubheaderLeft a {
+        font-size: 11px;
+        color: var(--light-text);
+        text-shadow: 0px 0px 2px var(--secondary-accent);
+        background-color: var(--primary-color);
+        padding: 0px 3px;
+        border-radius: 2px;
+    }
+
+        .SubheaderLeft a:hover {
+            background: radial-gradient( var(--primary-color), var(--secondary-color));
+            text-decoration: none;
+        }
+
+.SubheaderRight {
+    margin-right: 16px;
+}
+
+.PostListBody {
+    display: flex;
+    padding: 16px 16px 16px 36px;
+    flex: 1;
+}
+
+/* Post comment CSS */
+
+.BlogPostCommentContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.CommentItem {
+    display: flex;
+    margin: 3px 3px 16px 48px;
+    border-radius: 3px;
+    background-color: var(--secondary-background);
+    box-shadow: 2px -2px 16px -4px var(--shadow);
+}
+
+.CommentUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-shadow: inset 0px 0px 4px -1px var(--secondary-accent);
+    width: 150px;
+}
+
+.CommentUserPortrait {
+    height: 96px;
+    width: 96px;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0px -3px 8px -2px var(--shadow);
+}
+
+    .CommentUserPortrait img {
+        width: 100%;
+    }
+
+.CommentUserInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.CommentUserName {
+    text-align: center;
+    margin-top: 6px;
+    font-size: 16px;
+}
+
+.CommentBody {
+    display: flex;
+    box-shadow: inset 0px 0px 4px -1px var(--secondary-accent);
+    flex: 1;
+}
+
+.CommentText {
+    flex: 1;
+    padding: 16px 0px 16px 16px;
+}
+
+.CommentDate {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    text-shadow: 0px 0px 8px var(--secondary-accent);
+    width: 64px;
+    height: 100%;
+    border-radius: 0px 3px 3px 0px;
+    padding: 0;
+}
+
+.Divider {
+    height: 2px;
+    background: linear-gradient(to right, rgba(0,0,0,0) 0%, var(--secondary-color) 50%, rgba(0,0,0,0) 100%);
+    margin: 0px 32px 0px 32px;
+}
+
+/* Sidebar stuff */
+
+.BlogSidebar {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-right: 16px;
+    border-radius: 4px;
+    background-color: var(--secondary-background);
+    box-shadow: 0px -3px 16px -4px var(--shadow);
+    padding: 8px;
+}
+
+.SideBarPortrait {
+    position: relative;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0px -3px 8px -2px var(--shadow);
+    border-radius: 144px;
+    width: 144px;
+    height: 144px;
+}
+
+    .SideBarPortrait img {
+        width: 100%;
+    }
+
+.BlogSidebarUserContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -55px;
+    margin-bottom: 16px;
+}
+
+.SidebarTitle {
+    text-align: center;
+    width: 100%;
+    font-size: 24px;
+}
+
+.SidebarUserPresentation {
+    padding: 4px;
+}
+
+.BlogSidebarControls {
+    margin-top: 16px;
+}
+
+.BlogSearch {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+#BlogSearchbar {
+    align-self: center;
+    border-radius: 64px;
+    width: 80%;
+}
+
+    #BlogSearchbar:focus {
+        border: 1px solid;
+        border-color: var(--primary-color);
+        box-shadow: 0px 0px 8px 1px var(--primary-color);
+    }
+
+.SidebarArchive {
+    margin-top: 16px;
+}
+
+    .SidebarArchive p {
+        text-align: center;
+        width: 100%;
+        font-size: 24px;
+    }
+
+    .SidebarArchive ul {
+        list-style: none;
+        padding-left: 16px;
+    }
+
+        .SidebarArchive ul li:before {
+            content: "\2023";
+        }

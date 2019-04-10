@@ -1,0 +1,8 @@
+﻿@model List<Write.io.Models.Blog>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="HomePageBlogGrid" class="container pt-4">
+    @Html.Partial("_BlogGridPartialUser", Model)
+</div>

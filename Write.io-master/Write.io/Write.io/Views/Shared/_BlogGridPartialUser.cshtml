@@ -1,0 +1,24 @@
+﻿@model List<Write.io.Models.Blog>
+
+<div class="BlogGrid">
+    @foreach (var blog in Model)
+    {
+        var headerimage = "";
+        if (blog.BlogHeaderURL != "")
+        {
+            headerimage = "style=background-image:url(" + @blog.BlogHeaderURL + ")";
+        }
+        <a class="BlogCardLink" href="/b/@blog.User.Nickname/@blog.Title/">
+            <div class="BlogCard">
+                <div class="BlogCardHeader" @headerimage>
+                    <h2>@blog.Title</h2>
+                </div>
+                <div class="BlogCardBody">
+                    <p>@blog.Body</p>
+                    @Html.ActionLink("Edit", "EditBlog", "User", new { id = blog.Id }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Remove", "RemoveBlog", "User", new { id = blog.Id }, new { @class = "btn btn-warning btn-sm" })
+                </div>
+            </div>
+        </a>
+    }
+</div>

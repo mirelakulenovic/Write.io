@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNet.Identity;
+@model List<Write.io.Models.Post>
+
+
+<div class="PostListContainer">
+    @foreach (var post in Model)
+    {
+        var PostYear = post.Created.Year.ToString();
+        //Creates an array of months
+        string[] Months = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+        //Returns item from array, index is pulled based on month -1 as the array starts counting at 0 but months start at 1
+        var PostMonth = Months[post.Created.Month - 1];
+        var PostDate = post.Created.Day.ToString();
+        <div class="PostListItem">
+            <div class="PostListHeader">
+                <div class="PostListHeaderTitle">
+                    <a class="BlogPostLink" href="/b/@post.Blog.User.Nickname/@post.Blog.Title/@post.Id-@post.Title">@post.Title</a>
+                </div>
+                @if (ViewBag.Model.Blog.User.Id == User.Identity.GetUserId())
+                {
+                    <a href="/b/@post.Blog.User.Nickname/@post.Blog.Title/@post.Id-@post.Title/Edit/">
+                        <div class="PostListHeaderEditPost">
+                            <i class="fas fa-pencil-alt"></i>
+                        </div>
+                    </a>
+                }
+                <div class="PostListHeaderDate">
+                    <div class="HeaderDate">
+                        @PostDate
+                    </div>
+                    <div class="HeaderMonth">
+                        @PostMonth
+                    </div>
+                    <div class="HeaderYear">
+                        @PostYear
+                    </div>
+                </div>
+            </div>
+            <div class="PostListSubheader">
+                <div class="SubheaderLeft">
+                    <i class="fa fa-user" aria-hidden="true">&nbsp;</i>@post.Blog.User.Nickname&nbsp;|&nbsp;
+                    <i class="fa fa-tag" aria-hidden="true"></i>
+                    @foreach (var tag in post.Tags)
+                    {
+                        <a href="/b/@post.Blog.User.Nickname/@post.Blog.Title/S/@tag.Name">@tag.Name</a>
+                    }
+                </div>
+                <div class="SubheaderRight">
+                    <i class="fas fa-eye">&nbsp;</i>@post.Views |
+                    <i class="fa fa-comments" aria-hidden="true">&nbsp;</i>@post.Comments.Count()
+                </div>
+            </div>
+            <div class="PostListBody">
+                @post.Body
+            </div>
+            <div class="Divider"></div>
+        </div>
+    }
+</div>

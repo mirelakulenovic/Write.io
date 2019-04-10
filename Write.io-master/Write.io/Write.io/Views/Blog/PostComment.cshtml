@@ -1,0 +1,58 @@
+﻿@model Write.io.Models.Comment
+    @{ 
+        string[] Months = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+        var CurrentDate = DateTime.Now.Day;
+        var CurrentMonth = Months[DateTime.Now.Month -1];
+        var CurrentYear = DateTime.Now.Year;
+    }
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <div class="CommentItem">
+        <div class="CommentBody">
+            <div class="CommentText">
+                
+
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.body, new { htmlAttributes = new { @class = "form-control", @rows = 3, @id = "PostComment" } })
+                            @Html.ValidationMessageFor(model => model.body, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-7">
+                            <input id="PostCommentButton" data-p="@ViewBag.PostID" type="button" value="Comment" class="btn btn-default" />
+                        </div>
+                        <div class="col-md-4">
+                            <p id="CharCount">Character count: 0</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="CommentDate">
+                <div class="HeaderDate">
+                    @CurrentDate
+                </div>
+                <div class="HeaderMonth">
+                    @CurrentMonth
+                </div>
+                <div class="HeaderYear">
+                    @CurrentYear
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+}

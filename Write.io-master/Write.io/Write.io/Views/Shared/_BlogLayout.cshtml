@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNet.Identity;
+<!DOCTYPE html>
+<html>
+<head>
+    @{
+        var template = ViewBag.Model.Blog.Template + ".css";
+        var headerimage = "";
+        var CurrentUserId = User.Identity.GetUserId();
+        if (ViewBag.Model.Blog.BlogHeaderURL != null)
+        {
+            headerimage = "style=background-image:url(" + ViewBag.Model.Blog.BlogHeaderURL + ")";
+        }
+    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" type="text/css" href="~/Content/Themes/@template" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Write.IO <i class="fas fa-pencil-alt"></i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("My Blogs", "Index", "User", null, new { @class = "nav-link" })</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid body-content">
+        <div class="BlogHeaderContainer">
+            <div id="BlogHeaderImage" @headerimage></div>
+            <div class="BlogHeaderContents">
+                <div class="BlogTitle">
+                    <a class="BlogHeaderLink" href="/b/@ViewBag.Model.User.Nickname/@ViewBag.Model.Blog.Title/"><h1>@ViewBag.Model.Blog.Title</h1></a>
+                </div>
+                @if (ViewBag.Model.Blog.User.Id == CurrentUserId)
+                {
+                    <div class="BlogControllers">
+                        <form action="/b/@ViewBag.Model.User.Nickname/@ViewBag.Model.Blog.Title/CreatePost/">
+                            <button type="submit" class="btn btn-blog"><i class="fa fa-plus">&nbsp;</i>Write Post</button>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Renders the body -->
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

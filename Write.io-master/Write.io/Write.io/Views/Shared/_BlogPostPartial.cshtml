@@ -1,0 +1,105 @@
+﻿@using Microsoft.AspNet.Identity;
+@model Write.io.Models.PostViewModel
+@{
+    ViewBag.PostID = Model.Post.Id;
+    var PostYear = Model.Post.Created.Year.ToString();
+    //Creates an array of months
+    string[] Months = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+    //Returns item from array, index is pulled based on month -1 as the array starts counting at 0 but months start at 1
+    var PostMonth = Months[Model.Post.Created.Month - 1];
+    var PostDate = Model.Post.Created.Day.ToString();
+    
+}
+
+<div class="BlogPostContainer">
+    <div class="PostListItem">
+        <div class="PostListHeader">
+            <div class="PostListHeaderTitle">
+                <a class="BlogPostLink" href="/b/@Model.Post.Blog.User.Nickname/@Model.Post.Blog.Title/@Model.Post.Id-@Model.Post.Title">@Model.Post.Title</a>
+            </div>
+            @if (ViewBag.Model.Blog.User.Id == User.Identity.GetUserId())
+            {
+                <a href="/b/@Model.Post.Blog.User.Nickname/@Model.Post.Blog.Title/@Model.Post.Id-@Model.Post.Title/Edit/">
+                    <div class="PostListHeaderEditPost">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                </a>
+            }
+
+            <div class="PostListHeaderDate">
+                <div class="HeaderDate">
+                    @PostDate
+                </div>
+                <div class="HeaderMonth">
+                    @PostMonth
+                </div>
+                <div class="HeaderYear">
+                    @PostYear
+                </div>
+            </div>
+        </div>
+        <div class="PostListSubheader">
+            <div class="SubheaderLeft">
+                <i class="fa fa-user" aria-hidden="true">&nbsp;</i>@Model.Post.Blog.User.Nickname&nbsp;|&nbsp;
+                <i class="fa fa-tag" aria-hidden="true"></i> @foreach (var tag in Model.Post.Tags)
+                {
+                    <a href="/b/@Model.Post.Blog.User.Nickname/@Model.Post.Blog.Title/S/@tag.Name">@tag.Name</a>
+                }
+            </div>
+            <div class="SubheaderRight">
+                <i class="fas fa-eye">&nbsp;</i>@Model.Post.Views |
+                <i class="fa fa-comments" aria-hidden="true">&nbsp;</i>@Model.Post.Comments.Count()
+            </div>
+        </div>
+        <div class="PostListBody">
+            @Model.Post.Body
+        </div>
+        <div class="Divider"></div>
+    </div>
+    <h2>Comments</h2>
+    <div class="BlogPostCommentContainer">
+        @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated == true)
+        {
+            @Html.Partial("PostComment", Model.Comment)
+        }
+
+        @if (Model.Post.Comments != null)
+        {
+            foreach (var comment in Model.Post.Comments)
+            {
+                var CommentYear = comment.created.Year.ToString();
+                //Creates an array of months
+                //Returns item from array, index is pulled based on month -1 as the array starts counting at 0 but months start at 1
+                var CommentMonth = Months[comment.created.Month - 1];
+                var CommentDate = comment.created.Day.ToString();
+                <div class="CommentItem">
+                    <div class="CommentUser">
+                        <div class="CommentUserPortrait">
+                            <img src="@comment.User.AvatarURL" />
+                        </div>
+                        <div class="CommentUserName">
+                            @comment.User.Nickname
+                        </div>
+                    </div>
+                    <div class="CommentBody">
+                        <div class="CommentText">
+                            @comment.body
+                        </div>
+                        <div class="CommentDate">
+                            <div class="HeaderDate">
+                                @CommentDate
+                            </div>
+                            <div class="HeaderMonth">
+                                @CommentMonth
+                            </div>
+                            <div class="HeaderYear">
+                                @CommentYear
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
